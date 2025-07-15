@@ -1,0 +1,30 @@
+FROM python:3.11-slim
+
+# Install protoc
+RUN apt-get update && apt-get install -y \
+    protobuf-compiler \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements and install dependencies
+COPY python-server/requirements.txt .
+COPY python-server/server.py .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy proto file and generate Python code
+COPY proto/user_service.proto ./proto/
+RUN mkdir -p generated
+RUN python -m grpc_tools.protoc \
+    --proto_path=./proto \
+    --python_out=./generated \
+    --grpc_python_out=./generated \
+    ./proto/user_service.proto
+
+
+# Expose port
+EXPOSE 50053
+
+# Start the application
+CMD ["python", "server.py"]

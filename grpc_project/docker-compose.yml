@@ -1,0 +1,36 @@
+
+
+services:
+  go-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.golang
+    ports:
+      - "50051:50051"
+    container_name: go-grpc-server
+    networks:
+      - grpc-network
+
+  nodejs-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.node
+    ports:
+      - "50052:50052"
+    container_name: nodejs-grpc-server
+    networks:
+      - grpc-network
+
+  python-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.python
+    ports:
+      - "50053:50053"
+    container_name: python-grpc-server
+    networks:
+      - grpc-network
+
+networks:
+  grpc-network:
+    driver: bridge

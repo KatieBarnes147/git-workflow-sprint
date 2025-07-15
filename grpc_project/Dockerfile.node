@@ -1,0 +1,31 @@
+FROM node:18-alpine
+
+# Install protoc
+RUN apk add --no-cache protobuf-dev
+
+# Set working directory
+WORKDIR /app
+
+# Copy package.json and package-lock.json
+COPY nodejs-server/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy proto file and generate Node.js code
+COPY proto/user_service.proto ./proto/
+RUN mkdir -p generated
+RUN npx grpc_tools_node_protoc \
+    --js_out=import_style=commonjs,binary:./generated \
+    --grpc_out=grpc_js:./generated \
+    --proto_path=./proto \
+    ./proto/user_service.proto
+
+# Copy source code
+COPY  nodejs-server/server.js .
+
+# Expose port
+EXPOSE 50052
+
+# Start the application
+CMD ["node", "server.js"]
