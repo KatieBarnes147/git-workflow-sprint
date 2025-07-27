@@ -2,12 +2,8 @@ syntax = "proto3";
 
 package user_service;
 
-option go_package = "./generated";
-
 service UserService {
-  rpc ValidateCoordinates(CoordinatesRequest) returns (ValidationResponse);
-  rpc GetGridInfo(CoordinatesRequest) returns (GridInfoResponse);
-  rpc GetWeatherForecast(GridInfoRequest) returns (WeatherForecastResponse);
+  rpc ValidateCoordinates (CoordinatesRequest) returns (ValidationResponse);
 }
 
 message CoordinatesRequest {
@@ -17,22 +13,4 @@ message CoordinatesRequest {
 
 message ValidationResponse {
   bool is_valid = 1;
-}
-
-message GridInfoRequest {
-  double latitude = 1;
-  double longitude = 2;
-}
-
-message GridInfoResponse {
-  string grid_id = 1;
-  int32 grid_x = 2;
-  int32 grid_y = 3;
-  string zone = 4;
-}
-
-message WeatherForecastResponse {
-  string forecast = 1;
-  string temperature = 2;
-  string wind = 3;
 }
