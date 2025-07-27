@@ -51,7 +51,6 @@ Take more breaks to avoid burnout. I get addicted to my assignment and lock in f
 ## 🤝 Collaboration & Resources
 **What resources were most helpful?**  
 - Online API documentation  
-- ChatGPT guidance  
 - Stack Overflow and Python documentation  
 - VS Code’s IntelliSense and terminal tools
 

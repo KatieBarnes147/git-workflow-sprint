@@ -2,15 +2,66 @@ syntax = "proto3";
 
 package user_service;
 
+// Go package option
+option go_package = "./generated";
+
+// User service definition
 service UserService {
-  rpc ValidateCoordinates (CoordinatesRequest) returns (ValidationResponse);
+  // Get user by ID
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+  
+  // List all users
+  rpc ListUsers(ListUsersRequest) returns (ListUsersResponse);
+  
+  // Create a new user
+  rpc CreateUser(CreateUserRequest) returns (CreateUserResponse);
 }
 
-message CoordinatesRequest {
-  double latitude = 1;
-  double longitude = 2;
+// Request message for GetUser
+message GetUserRequest {
+  int32 user_id = 1;
 }
 
-message ValidationResponse {
-  bool is_valid = 1;
+// Response message for GetUser
+message GetUserResponse {
+  User user = 1;
+  bool success = 2;
+  string message = 3;
+}
+
+// Request message for ListUsers
+message ListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+}
+
+// Response message for ListUsers
+message ListUsersResponse {
+  repeated User users = 1;
+  int32 total_count = 2;
+  bool success = 3;
+  string message = 4;
+}
+
+// Request message for CreateUser
+message CreateUserRequest {
+  string name = 1;
+  string email = 2;
+  int32 age = 3;
+}
+
+// Response message for CreateUser
+message CreateUserResponse {
+  User user = 1;
+  bool success = 2;
+  string message = 3;
+}
+
+// User message definition
+message User {
+  int32 id = 1;
+  string name = 2;
+  string email = 3;
+  int32 age = 4;
+  string created_at = 5;
 }
