@@ -1,5 +1,4 @@
 # Week 2 — gRPC Workflow Sprint · `git-workflow-sprint`
-[![Secret Scan](https://github.com/KatieBarnes147/git-workflow-sprint/actions/workflows/secret-scan.yml/badge.svg)](https://github.com/KatieBarnes147/git-workflow-sprint/actions/workflows/secret-scan.yml)
 
 Week 2 focuses on a **gRPC stack** (Go, Node.js, Python) and clean Git workflow habits (branches, merges, safe reverts).  
 Because gRPC isn’t a browser UI, I include a small static “success” page for portfolio viewing.
