@@ -4,3 +4,5 @@ grpc_project/python-server/.venv/
 # Ignore Python cache
 __pycache__/
 *.pyc
+
+path/to/leaky.file
